@@ -3,156 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Додати Новий Проект - Construction Management</title>
-    <link rel="stylesheet" href="/cssFiles/addProjectPage.css">
-    <script type="module" src="addProject.js"></script>
+    <title>Додати Робітника - Construction Management</title>
+    <link rel="stylesheet" href="/cssFiles/addWorkerPage.css">
 
 </head>
 <body>
 
-<h1>Додати Новий Проект</h1>
+<h1>Додати Нового Робітника</h1>
 
-<form id="add-project-form"> <fieldset>
-    <legend>Основна Інформація</legend>
+<div id="form-message" style="display: none;"></div>
+<div id="loading-indicator" style="display: none;">Обробка...</div>
+
+<form id="add-worker-form">
+
     <div class="form-group">
-        <label for="project-name">Назва проекту:</label>
-        <input type="text" id="project-name" name="projectName" required>
+        <label for="worker-name">Повне ім'я та прізвище:</label>
+        <input type="text" id="worker-name" name="workerName" required>
     </div>
+
     <div class="form-group">
-        <label for="project-description">Опис проекту:</label>
-        <textarea id="project-description" name="projectDescription" rows="4"></textarea>
+        <label for="worker-specialty">Спеціальність / Посада:</label>
+        <select id="worker-specialty" name="workerSpecialty" required>
+            <option value="" disabled selected>-- Оберіть зі списку --</option>
+            <option value="Електрик">Електрик</option>
+            <option value="Сантехнік">Сантехнік</option>
+            <option value="Муляр">Муляр</option>
+            <option value="Штукатур">Штукатур</option>
+            <option value="Маляр">Маляр</option>
+            <option value="Тесляр">Тесляр</option>
+            <option value="Покрівельник">Покрівельник</option>
+            <option value="Плиточник">Плиточник</option>
+            <option value="Зварювальник">Зварювальник</option>
+            <option value="Виконроб">Виконроб</option>
+            <option value="Різноробочий">Різноробочий</option>
+            <option value="Інженер">Інженер</option>
+            <option value="Архітектор">Архітектор</option>
+            <option value="Дизайнер">Дизайнер</option>
+            <option value="Інше">Інше</option>
+        </select>
     </div>
-</fieldset>
 
-    <fieldset>
-        <legend>Кімнати та Розміри</legend>
-        <div class="form-group">
-            <label for="room-count">Кількість кімнат:</label>
-            <input type="number" id="room-count" name="roomCount" min="0" value="0">
-            <small>Введіть кількість для додавання полів розмірів.</small>
-        </div>
-        <div id="rooms-container">
-            <p id="rooms-placeholder"><small>Поля для розмірів з'являться тут.</small></p>
-        </div>
-    </fieldset>
+    <div class="form-group">
+        <label for="worker-phone">Контактний телефон:</label>
+        <input type="tel" id="worker-phone" name="workerPhone" placeholder="+380 XX XXX XX XX">
+    </div>
 
-    <fieldset>
-        <legend>Файли Проекту</legend>
-        <div class="form-group">
-            <label for="project-photos">Фото проекту (можна вибрати декілька):</label>
-            <input type="file" id="project-photos" name="projectPhotos[]" multiple accept="image/*">
-        </div>
-    </fieldset>
+    <div class="form-group">
+        <label for="worker-email">Email (необов'язково):</label>
+        <input type="email" id="worker-email" name="workerEmail">
+    </div>
 
-    <fieldset>
-        <legend>Завдання на Проект</legend>
-        <div class="form-group">
-            <p><strong>Стандартні завдання (виберіть потрібні):</strong></p>
-            <div><input type="checkbox" id="task-planning" name="standardTasks[]" value="Планування"><label for="task-planning"> Планування</label></div>
-            <div><input type="checkbox" id="task-demolition" name="standardTasks[]" value="Демонтаж"><label for="task-demolition"> Демонтаж</label></div>
-            <div><input type="checkbox" id="task-foundation" name="standardTasks[]" value="Фундаментні роботи"><label for="task-foundation"> Фундаментні роботи</label></div>
-            <div><input type="checkbox" id="task-walls" name="standardTasks[]" value="Зведення стін"><label for="task-walls"> Зведення стін</label></div>
-            <div><input type="checkbox" id="task-roofing" name="standardTasks[]" value="Покрівельні роботи"><label for="task-roofing"> Покрівельні роботи</label></div>
-            <div><input type="checkbox" id="task-electrical" name="standardTasks[]" value="Електромонтажні роботи"><label for="task-electrical"> Електромонтажні роботи</label></div>
-            <div><input type="checkbox" id="task-plumbing" name="standardTasks[]" value="Сантехнічні роботи"><label for="task-plumbing"> Сантехнічні роботи</label></div>
-            <div><input type="checkbox" id="task-finishing" name="standardTasks[]" value="Оздоблювальні роботи"><label for="task-finishing"> Оздоблювальні роботи</label></div>
-        </div>
-        <hr>
-        <div class="form-group">
-            <label for="custom-task-name"><strong>Додати власне завдання:</strong></label>
-            <input type="text" id="custom-task-name" placeholder="Назва нового завдання">
-            <button type="button" id="add-custom-task-button">Додати Завдання</button>
-        </div>
-        <div id="tasks-container">
-            <p><strong>Список завдань проекту (впливає на розрахунки):</strong></p>
-            <ul id="project-tasks-list">
-            </ul>
-        </div>
-    </fieldset>
+    <div class="form-group">
+        <label for="worker-rate">Ставка / Вартість години (грн, необов'язково):</label>
+        <input type="number" id="worker-rate" name="workerRate" min="0" step="1">
+        <small>Це поле може використовуватись для майбутніх розрахунків зарплати.</small>
+    </div>
 
-    <fieldset>
-        <legend>Робітники на Проекті</legend>
-        <div class="form-group">
-            <label for="existing-workers"><strong>Вибрати існуючих робітників:</strong></label>
-            <select id="existing-workers" name="existingWorkers[]" multiple size="5">
-                <option disabled>(Завантаження списку...)</option>
-            </select>
-            <small>Затисніть Ctrl (або Cmd на Mac), щоб вибрати декількох.</small>
-        </div>
-        <hr>
-        <p style="font-weight:bold;">Робітники, призначені на цей проект:</p>
-        <ul id="project-workers-list">
-        </ul>
-    </fieldset>
-
-    <fieldset>
-        <legend>Дані Власника</legend>
-        <div class="form-group">
-            <label for="owner-name">Ім'я власника:</label>
-            <input type="text" id="owner-name" name="ownerName">
-        </div>
-        <div class="form-group">
-            <label for="owner-contact-phone">Телефон власника:</label>
-            <input type="tel" id="owner-contact-phone" name="ownerPhone">
-        </div>
-        <div class="form-group">
-            <label for="owner-contact-email">Email власника:</label>
-            <input type="email" id="owner-contact-email" name="ownerEmail">
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Дата та Статус</legend>
-        <div class="form-group">
-            <label for="project-start-date">Планована дата початку робіт:</label>
-            <input type="date" id="project-start-date" name="projectStartDate" required>
-            <small>На основі цієї дати та завдань будуть розраховані строки.</small>
-        </div>
-        <div class="form-group">
-            <label for="project-initial-status">Початковий статус проекту:</label>
-            <select id="project-initial-status" name="projectInitialStatus">
-                <option value="planning" selected>Планування</option>
-                <option value="preparation">Підготовка</option>
-                <option value="not_started">Не розпочато</option>
-            </select>
-        </div>
-    </fieldset>
-
-    <button type="submit" id="save-project-button" style="padding: 15px 30px; background-color: #2ecc71; color: white; border: none; width: 100%; font-size: 1.1em; font-weight: bold;">Зберегти Проект</button>
+    <button type="submit" id="save-worker-button">Додати Робітника в Систему</button>
 
 </form>
 
-<script>
-    const roomCountInput = document.getElementById('room-count');
-    const roomsContainer = document.getElementById('rooms-container');
-    const roomsPlaceholder = document.getElementById('rooms-placeholder');
-
-    roomCountInput.addEventListener('input', () => {
-        const count = parseInt(roomCountInput.value, 10) || 0;
-        roomsContainer.innerHTML = '';
-
-        if (count <= 0) {
-            roomsContainer.appendChild(roomsPlaceholder);
-            return;
-        }
-
-        for (let i = 1; i <= count; i++) {
-            const roomEntry = document.createElement('div');
-            roomEntry.classList.add('room-entry', 'form-group');
-            roomEntry.innerHTML = `
-                    <p style="font-weight:bold; margin-bottom: 5px;">Кімната ${i}</p>
-                    <label for="room-${i}-length" style="display: inline-block; width: 48%; margin-right: 2%;">Довжина (м):</label>
-                    <input type="number" id="room-${i}-length" name="roomLengths[]" min="0" step="0.1" style="width: 48%; display: inline-block;">
-                    <label for="room-${i}-width" style="display: inline-block; width: 48%; margin-right: 2%;">Ширина (м):</label>
-                    <input type="number" id="room-${i}-width" name="roomWidths[]" min="0" step="0.1" style="width: 48%; display: inline-block;">
-                     <label for="room-${i}-notes">Додаткові нотатки по кімнаті ${i}:</label>
-                     <input type="text" id="room-${i}-notes" name="roomNotes[]" placeholder="Напр., висота стелі, особливості">
-                `;
-            roomsContainer.appendChild(roomEntry);
-        }
-    });
-
-</script>
+<script type="module" src="addWorker.js"></script>
 
 </body>
 </html>

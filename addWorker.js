@@ -31,7 +31,7 @@ addWorkerForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     if (!workerNameInput.value || !workerSpecialtySelect.value) {
-        showMessage("Будь ласка, заповніть ім'я та спеціальність робітника.", "error");
+        showMessage("Будь ласка,заповніть ім'я та спеціальність робітника.", "error");
         return;
     }
 

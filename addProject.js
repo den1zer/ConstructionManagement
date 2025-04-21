@@ -3,7 +3,16 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { getFirestore, collection, addDoc, serverTimestamp, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-const firebaseConfig = { };
+const firebaseConfig = {
+
+    apiKey: "AIzaSyBNmgSTXoabY_JhynyfxB-4KCcRvYLi6B4",
+    authDomain: "constructionmanagementsy-b8e52.firebaseapp.com",
+    projectId: "constructionmanagementsy-b8e52",
+    storageBucket: "constructionmanagementsy-b8e52.firebasestorage.app",
+    messagingSenderId: "390996667134",
+    appId: "1:390996667134:web:0d99cf1ee58824195613af",
+    measurementId: "G-1B0X0DGTC1"
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -204,7 +213,7 @@ addProjectForm.addEventListener('submit', async (event) => {
         showMessage("Проект успішно створено!", "success");
         addProjectForm.reset();
         roomsContainer.innerHTML = '<p id="rooms-placeholder"><small>Поля для розмірів з\'являться тут.</small></p>';
-        projectTasksList.innerHTML = '';
+        projectTasksList.innerHTML = ' ';
         loadWorkersIntoSelect();
 
     } catch (error) {
