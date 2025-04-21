@@ -51,7 +51,7 @@ loginButton.addEventListener('click', (e) => {
             authErrorDiv.textContent = 'Вхід виконано успішно!';
             authErrorDiv.style.color = 'green';
 
-             window.location.href = 'dashboard.html';
+             window.location.href = 'mainPage.html';
 
         })
         .catch((error) => {

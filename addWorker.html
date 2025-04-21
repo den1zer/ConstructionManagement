@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати Робітника - Construction Management</title>
+    <link rel="stylesheet" href="/cssFiles/addWorkerPage.css">
+<script type="module" src="addWorker.js"></script>
 </head>
 <body>
-$END$
+
+<h1>Додати Нового Робітника</h1>
+
+<div id="form-message" style="display: none;"></div>
+<div id="loading-indicator" style="display: none;">Обробка...</div>
+
+<form id="add-worker-form">
+
+    <div class="form-group">
+        <label for="worker-name">Повне ім'я та прізвище:</label>
+        <input type="text" id="worker-name" name="workerName" required>
+    </div>
+
+    <div class="form-group">
+        <label for="worker-specialty">Спеціальність / Посада:</label>
+        <select id="worker-specialty" name="workerSpecialty" required>
+            <option value="" disabled selected>-- Оберіть зі списку --</option>
+            <option value="Електрик">Електрик</option>
+            <option value="Сантехнік">Сантехнік</option>
+            <option value="Муляр">Муляр</option>
+            <option value="Штукатур">Штукатур</option>
+            <option value="Маляр">Маляр</option>
+            <option value="Тесляр">Тесляр</option>
+            <option value="Покрівельник">Покрівельник</option>
+            <option value="Плиточник">Плиточник</option>
+            <option value="Зварювальник">Зварювальник</option>
+            <option value="Виконроб">Виконроб</option>
+            <option value="Різноробочий">Різноробочий</option>
+            <option value="Інженер">Інженер</option>
+            <option value="Архітектор">Архітектор</option>
+            <option value="Дизайнер">Дизайнер</option>
+            <option value="Інше">Інше</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="worker-phone">Контактний телефон:</label>
+        <input type="tel" id="worker-phone" name="workerPhone" placeholder="+380 XX XXX XX XX">
+    </div>
+
+    <div class="form-group">
+        <label for="worker-email">Email (необов'язково):</label>
+        <input type="email" id="worker-email" name="workerEmail">
+    </div>
+
+    <div class="form-group">
+        <label for="worker-rate">Ставка / Вартість години (грн, необов'язково):</label>
+        <input type="number" id="worker-rate" name="workerRate" min="0" step="1">
+        <small>Це поле може використовуватись для майбутніх розрахунків зарплати.</small>
+    </div>
+
+    <button type="submit" id="save-worker-button">Додати Робітника в Систему</button>
+
+</form>
+
+<script type="module" src="add-worker.js"></script>
+
 </body>
 </html>

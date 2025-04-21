@@ -39,7 +39,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="tel"] {
-    width: 95%; /* Трохи менше 100% для відступів */
+    width: 95%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -54,7 +54,7 @@ input[type="tel"] {
     border-radius: 4px;
     cursor: pointer;
     font-size: 1em;
-    margin-right: 10px; /* Додамо відступ між кнопками */
+    margin-right: 10px;
 }
 
 .button:hover {
@@ -70,12 +70,12 @@ input[type="tel"] {
 
 
 #auth-error {
-    color: #dc3545; /* Червоний для помилок */
+    color: #dc3545;
     margin-bottom: 15px;
     font-weight: bold;
 }
 
-/* Стилі для списку проєктів (якщо додавав раніше) */
+
 .project-item {
     border: 1px solid #eee;
     padding: 10px;

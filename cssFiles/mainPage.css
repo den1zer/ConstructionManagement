@@ -1,0 +1,226 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    background-color: #f0f2f5;
+    color: #1a1818;
+    margin: 0;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+header {
+    background-color: #ffffff;
+    color: #333;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.6em;
+    color: #2c3e50;
+}
+
+#user-actions {
+    display: flex;
+    align-items: center;
+}
+
+#user-email {
+    margin-right: 20px;
+    color: #555;
+    font-size: 0.9em;
+}
+
+#logout-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+#logout-button:hover {
+    background-color: #5a6268;
+}
+
+main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.action-buttons {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.action-buttons a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-buttons a:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#projects-section h2 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+#loading-projects,
+#no-projects {
+    text-align: center;
+    padding: 40px 20px;
+    color: #777;
+    font-size: 1.1em;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: none;
+}
+
+#project-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.project-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e8e8e8;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.project-card img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.project-card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    color: #333;
+}
+
+.project-card h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.project-card h3 a:hover {
+    color: #007bff;
+}
+
+.project-card p {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 8px;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+}
+
+.project-card p strong {
+    color: #333;
+    min-width: 70px;
+    display: inline-block;
+}
+
+.project-card small {
+    font-size: 1em;
+    color: #555;
+}
+
+.project-card .project-status {
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 15px;
+    }
+    header h1 {
+        margin-bottom: 10px;
+        font-size: 1.4em;
+    }
+    #user-actions {
+        margin-top: 10px;
+    }
+    #project-list-container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 15px;
+    }
+    .project-card img {
+        height: 160px;
+    }
+    .project-card-content {
+        padding: 15px;
+    }
+    .project-card h3 {
+        font-size: 1.15em;
+    }
+}
+
+@media (max-width: 480px) {
+    main { padding: 0 15px; }
+    .action-buttons { flex-direction: column; }
+    .action-buttons a { width: 100%; box-sizing: border-box; }
+    #project-list-container {
+        grid-template-columns: 1fr;
+    }
+}
