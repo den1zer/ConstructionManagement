@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Менеджер Завдань - Проект: <span id="planner-project-name-title"></span></title>
+    <link rel="stylesheet" href="../cssFiles/taskPlanner.css"> </head>
+<body>
+<header class="dashboard-header">
+    <div class="header-project-info"> <h1>Менеджер Завдань: <span id="header-project-name"></span></h1>
+        <div class="header-project-summary"> <small>Кімнат: <span id="header-room-count"></span></small>
+            <small style="margin-left: 15px;">Загальна площа: <span id="header-total-area"></span> м²</small>
+        </div>
+    </div>
+    <div id="user-actions">
+        <span id="user-email"></span>
+        <button id="logout-button-planner">Вийти</button>
+    </div>
+</header>
+
+<main class="details-container">
+    <div class="back-button-container">
+        <a href="#" id="back-to-project-details-link" class="back-button">&larr; До деталей проекту</a>
+        <button type="button" id="generate-report-btn" class="button-download-report">
+            <svg class="button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1.2em" height="1.2em">
+                <path d="M12 15.586l-4.293-4.293a1 1 0 011.414-1.414L11 11.586V4a1 1 0 112 0v7.586l1.879-1.879a1 1 0 111.414 1.414L12 15.586zM19 17a1 1 0 011 1v1a2 2 0 01-2 2H6a2 2 0 01-2-2v-1a1 1 0 112 0v1h12v-1a1 1 0 011-1z"/>
+            </svg>
+            <span>Завантажити звіт</span>
+        </button>
+        <a href="mainPage.html" class="back-button" style="margin-left: 10px;">&larr; До всіх проектів</a>
+    </div>
+
+    <div id="manager-message-area" class="form-message" style="display: none;"></div>
+
+    <section id="task-management-section" style="display: none;">
+        <h2>Список Завдань Проекту</h2>
+        <div id="tasks-display-area">
+            <p>Завдання не завантажені.</p>
+        </div>
+    </section>
+
+</main>
+
+<script type="module" src="/src/taskPlanner.js"></script>
+<script>// Функція для застосування теми
+function applyTheme(theme) {
+    if (theme === 'dark') {
+        document.body.classList.add('dark-mode'); // Застосовує темну тему
+    } else {
+        document.body.classList.remove('dark-mode'); // Застосовує світлу тему
+    }
+}
+
+// Зчитуємо стан теми з LocalStorage
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light'; // За замовчуванням - світла тема
+    applyTheme(savedTheme);
+});
+
+// Функція для перемикання теми
+function toggleTheme() {
+    const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    // Застосовуємо нову тему
+    applyTheme(newTheme);
+
+    // Зберігаємо новий стан теми в LocalStorage
+    localStorage.setItem('theme', newTheme);
+}
+
+// Додаємо до кнопки (або іншого елемента) можливість переключити тему
+document.getElementById('theme-toggle-btn')?.addEventListener('click', toggleTheme);</script>
+</body>
+</html>

@@ -1,173 +1,190 @@
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --accent-color: #0d6efd;
+    --button-color: #0d6efd;
+    --button-hover: #0b5ed7;
+    --secondary-button: #6c757d;
+    --secondary-hover: #5a6268;
+    --shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
+    --border-color: #dee2e6;
+}
+
+body.dark-mode {
+    --bg-color: #1e1e2f;
+    --text-color: #f0f0f0;
+    --card-bg: #2b2b3c;
+    --accent-color: #66b2ff;
+    --button-color: #007bff;
+    --button-hover: #3399ff;
+    --secondary-button: #444;
+    --secondary-hover: #333;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --border-color: #444;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    line-height: 1.6;
-    background-color: #f8f9fa;
-    color: #212529;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 a {
-    color: #0d6efd;
+    color: var(--accent-color);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: 0.2s;
 }
-
 a:hover {
-    color: #0a58ca;
+    color: var(--button-hover);
 }
 
 header {
-    background-color: #ffffff;
-    color: #343a40;
-    padding: 1rem 2rem;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.2rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid #dee2e6;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header h1 {
+    font-size: 1.6em;
+    font-weight: bold;
     margin: 0;
-    font-size: 1.5em;
-    font-weight: 600;
-    color: #343a40;
+}
+.project-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.delete-project-btn {
+    background-color: #dc3545; /* Червоний для кнопки Видалити */
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.delete-project-btn:hover {
+    background-color: #c82333; /* Темніший відтінок червоного при наведенні */
+    transform: translateY(-2px);
+}
+
+.delete-project-btn:active {
+    background-color: #dc3545;
+    transform: translateY(2px);
 }
 
 #user-actions {
     display: flex;
     align-items: center;
+    gap: 1rem;
 }
 
 #user-email {
-    margin-right: 1.5rem;
-    color: #495057;
     font-size: 0.95em;
 }
 
-#logout-button {
-    background-color: #6c757d;
+#logout-button,
+#theme-toggle {
+    background-color: var(--secondary-button);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 0.3rem;
-    cursor: pointer;
+    border-radius: 6px;
     font-size: 0.9em;
-    line-height: 1.5;
+    cursor: pointer;
     transition: background-color 0.2s;
 }
 
-#logout-button:hover {
-    background-color: #5a6268;
+#logout-button:hover,
+#theme-toggle:hover {
+    background-color: var(--secondary-hover);
 }
 
 main {
-    max-width: 1280px;
-    margin: 2rem auto;
+    max-width: 1300px;
+    margin: 2.5rem auto;
     padding: 0 1.5rem;
 }
 
 .action-buttons {
-    margin-bottom: 2.5rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .action-buttons a.button {
-    display: inline-block;
-    text-decoration: none;
-    background-color: #0d6efd;
-    color: white;
     padding: 0.75rem 1.5rem;
-    border-radius: 0.3rem;
+    border-radius: 8px;
+    font-weight: 600;
     font-size: 1em;
-    font-weight: 500;
+    background-color: var(--button-color);
+    color: white;
+    box-shadow: var(--shadow);
+    transition: 0.25s;
     text-align: center;
-    transition: background-color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
 }
 
 .action-buttons a.button:hover {
-    background-color: #0b5ed7;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--button-hover);
 }
 
-.action-buttons .add-worker-btn {
+.add-worker-btn {
     background-color: #198754;
 }
 
-.action-buttons .add-worker-btn:hover {
+.add-worker-btn:hover {
     background-color: #157347;
 }
 
 #projects-section h2 {
     font-size: 1.75em;
-    color: #343a40;
+    border-bottom: 2px solid var(--border-color);
     margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid #dee2e6;
-    font-weight: 600;
-}
-
-#loading-projects,
-#no-projects {
-    text-align: center;
-    padding: 3rem 1.5rem;
-    color: #6c757d;
-    font-size: 1.1em;
-    background-color: #ffffff;
-    border-radius: 0.5rem;
-    margin-top: 1.5rem;
-    border: 1px solid #e9ecef;
-    display: none;
+    padding-bottom: 0.5rem;
 }
 
 #project-list-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.75rem;
+    gap: 1.5rem;
 }
 
 .project-card {
-    background-color: #ffffff;
-    border-radius: 0.5rem;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.07);
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    transition: 0.3s;
     display: flex;
     flex-direction: column;
-    border: 1px solid #e9ecef;
 }
 
 .project-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-.project-card img {
-    display: block;
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    background-color: #e9ecef;
-}
-
-.project-card-content {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
 .project-card h3 {
     margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.25em;
-    font-weight: 600;
-    color: #343a40;
-    line-height: 1.4;
+    font-size: 1.3em;
+    color: var(--text-color);
 }
 
 .project-card h3 a {
@@ -176,106 +193,60 @@ main {
 }
 
 .project-card h3 a:hover {
-    color: #0d6efd;
+    color: var(--accent-color);
 }
 
 .project-card p {
     font-size: 0.95em;
-    color: #495057;
-    margin-bottom: 0.6rem;
-    line-height: 1.5;
-    display: flex;
-    align-items: baseline;
+    margin: 0.4em 0;
+    color: var(--text-color);
 }
 
 .project-card p strong {
-    color: #343a40;
-    font-weight: 500;
     min-width: 80px;
     display: inline-block;
-    margin-right: 0.5rem;
 }
 
-.project-card small {
-    font-size: 1em;
-    color: #495057;
+#loading-projects,
+#no-projects {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    color: #999;
+    font-style: italic;
+    display: none;
 }
 
-.project-card .project-status {
-    font-weight: 500;
-}
-
-@media (max-width: 992px) {
-    #project-list-container {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
-    }
-    header h1 {
-        font-size: 1.4em;
-    }
-    #user-email {
-        margin-right: 1rem;
-    }
-    main {
-        margin-top: 1.5rem;
-    }
+/* Темна кнопка перемикача теми */
+#theme-toggle {
+    margin-left: 0.5rem;
 }
 
 @media (max-width: 768px) {
     header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem 1.5rem;
+        flex-direction: column; /* Ставимо все в колонку */
+        align-items: stretch;   /* Розтягуємо по ширині */
+        height: auto;          /* Автоматична висота */
+        padding: 1rem;
     }
     header h1 {
         margin-bottom: 0.75rem;
+        text-align: center; /* Центруємо заголовок */
     }
     #user-actions {
         margin-top: 0.5rem;
         width: 100%;
-        justify-content: space-between;
-    }
-    .project-card img {
-        height: 160px;
-    }
-    .project-card-content {
-        padding: 1.25rem;
-    }
-    .project-card h3 {
-        font-size: 1.15em;
-    }
-}
-
-@media (max-width: 576px) {
-    body {
-        font-size: 15px;
-    }
-    main {
-        padding: 0 1rem;
-        margin-top: 1rem;
-    }
-    header {
-        padding: 1rem;
+        justify-content: space-between; /* Розносимо елементи по краях */
     }
     .action-buttons {
-        flex-direction: column;
-        gap: 0.75rem;
-        margin-bottom: 2rem;
+        flex-direction: column; /* Кнопки одна під одною */
+        align-items: stretch;
     }
     .action-buttons a.button {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 0.7rem 1rem;
+        width: auto; /* Займають потрібну ширину, але flex-direction вже column */
     }
-    #project-list-container {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    #projects-section h2 {
-        font-size: 1.5em;
-        margin-bottom: 1rem;
-    }
-    .project-card p strong {
-        min-width: 70px;
-    }
+    #projects-section h2 { font-size: 1.5em; }
+    .project-card-content { padding: 1rem; }
 }

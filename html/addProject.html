@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати Новий Проект - Construction Management</title>
+    <link rel="stylesheet" href="../cssFiles/addProjectPage.css">
+</head>
+<body>
+
+<h1>Додати Новий Проект</h1>
+<div id="form-message" class="form-message" style="display: none;"></div>
+<div id="loading-indicator" style="display: none; text-align:center; padding:10px;">Обробка...</div>
+
+<form id="add-project-form">
+    <fieldset>
+        <legend>Основна Інформація</legend>
+        <div class="form-group">
+            <label for="project-name">Назва проекту:</label>
+            <input type="text" id="project-name" name="projectName" required>
+        </div>
+        <div class="form-group">
+            <label for="project-description">Опис проекту:</label>
+            <textarea id="project-description" name="projectDescription" rows="4"></textarea>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Кімнати та Розміри</legend>
+        <div class="form-group">
+            <label for="room-count">Кількість кімнат:</label>
+            <input type="number" id="room-count" name="roomCount" min="0" value="0">
+            <small>Введіть кількість для додавання полів розмірів.</small>
+        </div>
+        <div id="rooms-container">
+            <p id="rooms-placeholder"><small>Поля для розмірів з'являться тут.</small></p>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Завдання на Проект</legend>
+        <div class="form-group">
+            <p><strong>Стандартні завдання (виберіть потрібні):</strong></p>
+            <div><input type="checkbox" id="task-plastering" name="standardTasks[]" value="Шпаклювання стін і стелі"><label for="task-plastering"> Шпаклювання стін і стелі</label></div>
+            <div><input type="checkbox" id="task-painting" name="standardTasks[]" value="Фарбування"><label for="task-painting"> Фарбування</label></div>
+            <div><input type="checkbox" id="task-laminate" name="standardTasks[]" value="Укладання ламінату"><label for="task-laminate"> Укладання ламінату</label></div>
+            <div><input type="checkbox" id="task-tiling" name="standardTasks[]" value="Укладання плитки"><label for="task-tiling"> Укладання плитки</label></div>
+            <div><input type="checkbox" id="task-drywall" name="standardTasks[]" value="Монтаж гіпсокартону"><label for="task-drywall"> Монтаж гіпсокартону</label></div>
+            <div><input type="checkbox" id="task-electrical" name="standardTasks[]" value="Електромонтажні роботи"><label for="task-electrical"> Електромонтажні роботи</label></div>
+            <div><input type="checkbox" id="task-general-prep" name="standardTasks[]" value="Підготовчі/Завершальні роботи"><label for="task-general-prep"> Підготовчі/Завершальні роботи</label></div>
+        </div>
+        <hr>
+
+        <div id="tasks-container">
+            <p><strong>Список завдань проекту (впливає на розрахунки):</strong></p>
+            <ul id="project-tasks-list">
+            </ul>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Робітники на Проекті</legend>
+        <div class="form-group">
+            <label for="existing-workers"><strong>Вибрати існуючих робітників:</strong></label>
+            <select id="existing-workers" name="existingWorkers[]" multiple size="5">
+                <option disabled value="">(Завантаження списку...)</option>
+            </select>
+            <small>Затисніть Ctrl (або Cmd на Mac), щоб вибрати декількох.</small>
+        </div>
+        <hr>
+        <p style="font-weight:bold;">Робітники, призначені на цей проект:</p>
+        <ul id="project-workers-list">
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>Дані Власника</legend>
+        <div class="form-group">
+            <label for="owner-name">Ім'я власника:</label>
+            <input type="text" id="owner-name" name="ownerName">
+        </div>
+        <div class="form-group">
+            <label for="owner-phone">Телефон Власника:</label>
+            <input
+                    type="tel"
+                    id="owner-contact-phone"
+                    name="ownerPhone"
+                    placeholder="+380 (XX) XXX-XXXX"
+                    pattern="^\+380\s\(\d{2}\)\s\d{3}-\d{4}$"
+                    required
+                    title="Формат телефону: +380 (XX) XXX-XXXX"
+            >
+            <small>Введіть номер телефону у форматі +380 (XX) XXX-XXXX</small>
+        </div>
+
+        <div class="form-group">
+            <label for="owner-contact-email">Email власника:</label>
+            <input type="email" id="owner-contact-email" name="ownerEmail">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Дата та Статус</legend>
+        <div class="form-group">
+            <label for="project-start-date">Планована дата початку робіт:</label>
+            <input type="date" id="project-start-date" name="projectStartDate" required>
+            <small>На основі цієї дати та завдань будуть розраховані строки.</small>
+        </div>
+        <div class="form-group">
+            <label for="project-initial-status">Початковий статус проекту:</label>
+            <select id="project-initial-status" name="projectInitialStatus">
+                <option value="planning" selected>Планування</option>
+                <option value="preparation">Підготовка</option>
+                <option value="not_started">Не розпочато</option>
+            </select>
+        </div>
+    </fieldset>
+<div><button type="submit" id="save-project-button" >Зберегти Проект</button></div>
+
+</form>
+
+<script type="module" src="/src/addProject.js"></script>
+
+<script>
+    const roomCountInputHTML = document.getElementById('room-count');
+    const roomsContainerHTML = document.getElementById('rooms-container');
+    const roomsPlaceholderHTML = document.getElementById('rooms-placeholder');
+
+    if (roomCountInputHTML && roomsContainerHTML && roomsPlaceholderHTML) {
+        roomCountInputHTML.addEventListener('input', () => {
+            const count = parseInt(roomCountInputHTML.value, 10) || 0;
+            roomsContainerHTML.innerHTML = ''; // Очищуємо
+
+            if (count <= 0) {
+                roomsContainerHTML.appendChild(roomsPlaceholderHTML); // Повертаємо плейсхолдер
+                return;
+            }
+
+            for (let i = 1; i <= count; i++) {
+                const roomEntry = document.createElement('div');
+                roomEntry.classList.add('room-entry', 'form-group'); // Класи для CSS
+                roomEntry.innerHTML = `
+                    <p style="font-weight:bold; margin-bottom: 5px;">Кімната ${i}</p>
+                    <div class="form-group">
+                        <label for="room-${i}-length">Довжина (м):</label>
+                        <input type="number" id="room-${i}-length" name="roomLengths[]" min="0" step="0.1" style="width: 100%;">
+                    </div>
+                    <div class="form-group">
+                        <label for="room-${i}-width">Ширина (м):</label>
+                        <input type="number" id="room-${i}-width" name="roomWidths[]" min="0" step="0.1" style="width: 100%;">
+                    </div>
+                    <div class="form-group">
+                        <label for="room-${i}-height">Висота (м):</label>
+                        <input type="number" id="room-${i}-height" name="roomHeights[]" min="0" step="0.01" style="width: 100%;">
+                    </div>
+                    <div class="form-group">
+                         <label for="room-${i}-notes">Додаткові нотатки по кімнаті ${i}:</label>
+                         <input type="text" id="room-${i}-notes" name="roomNotes[]" placeholder="Напр., особливості планування" style="width: 100%;">
+                    </div>
+                    ${i < count ? '<hr style="margin-top:10px; margin-bottom:10px;">' : ''}
+                `;
+                roomsContainerHTML.appendChild(roomEntry);
+            }
+        });
+    } else {
+        console.warn("Елементи для динамічного додавання кімнат не знайдені.");
+    }
+
+        const themeToggle = document.querySelector("#theme-toggle");
+
+        // Перевірка, чи є локальне збереження теми
+        const userTheme = localStorage.getItem("theme");
+        if (userTheme === "dark") {
+        document.body.classList.add("dark-mode");
+    }
+
+        themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        // Зберігаємо тему в localStorage
+        if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+    } else {
+        localStorage.setItem("theme", "light");
+    }
+    });
+
+</script>
+
+</body>
+</html>

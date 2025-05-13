@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель Керування Проектами</title>
+    <link rel="stylesheet" href="../cssFiles/mainPage.css">
+</head>
+<body>
+
+<header>
+    <h1>Керування Будівельними Проектами</h1>
+    <div id="user-actions">
+
+        <span id="user-email"></span> <button id="logout-button">Вийти</button>
+    </div>
+</header>
+
+<main>
+    <div class="action-buttons">
+        <a href="addProject.html" class="button add-project-btn">Додати Новий Проект</a>
+        <a href="addWorker.html" class="button add-worker-btn">Додати Робітника</a>
+    </div>
+
+    <section id="projects-section">
+        <h2>Існуючі Проекти:</h2>
+
+        <div id="loading-projects" style="display: none;">Завантаження проектів...</div>
+        <div id="no-projects" style="display: none;">У вас ще немає створених проектів.</div>
+
+        <div id="project-list-container">
+        </div>
+    </section>
+</main>
+
+<script type="module" src="/src/mainPage.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.createElement("button");
+    toggleBtn.id = "theme-toggle";
+    toggleBtn.textContent = "🌓";
+    document.querySelector("#user-actions").appendChild(toggleBtn);
+
+    const currentTheme = localStorage.getItem("theme");
+    if (currentTheme === "dark") document.body.classList.add("dark-mode");
+
+    toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    });
+});</script>
+</body>
+</html>

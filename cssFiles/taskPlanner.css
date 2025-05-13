@@ -1,0 +1,780 @@
+/* ---- Змінні теми (адаптовані під ваш новий стиль) ---- */
+:root {
+    /* Основні кольори та градієнти з вашого прикладу */
+    --bg-gradient: linear-gradient(120deg, #f8f9fa, #e9ecef);
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --accent-color: #0d6efd; /* Використовується для акцентів, можливо, заголовків секцій */
+    --border-color: #dee2e6;
+    --shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+
+    /* Кольори для кнопок з вашого прикладу */
+    --button-primary-bg: #1837ff; /* Основна кнопка, наприклад "Зберегти" */
+    --button-primary-hover: #33c01d; /* Ваш приклад мав зелений для hover, що може бути для успішних дій */
+    --button-secondary-bg: #6c757d;
+    --button-secondary-hover: #5a6268;
+
+    /* Спеціальні кольори для кнопок (наприклад, "Вийти") */
+    --button-danger-gradient-start: #dc3545;
+    --button-danger-gradient-end: #ff6b6b;
+    --button-danger-gradient-hover-start: #ff6b6b;
+    --button-danger-gradient-hover-end: #dc3545;
+
+    /* Шрифти */
+    --font-family: "Segoe UI", "Roboto", sans-serif;
+    --font-size-base: 16px; /* Базовий розмір шрифту */
+    --font-size-small: 0.875rem; /* 14px */
+    --font-size-medium: 1rem; /* 16px */
+    --font-size-large: 1.25rem; /* 20px */
+    --font-size-xlarge: 1.5rem; /* 24px */
+    --font-size-xxlarge: 2rem; /* 32px */
+
+    /* Статуси завдань (можна налаштувати кольори) */
+    --status-new-color: var(--accent-color); /* Синій */
+    --status-progress-color: #ffc107;       /* Жовтий */
+    --status-done-color: #198754;           /* Зелений */
+    --status-pending-color: #dc3545;        /* Червоний */
+
+    /* Додаткові кольори */
+    --subtle-bg-color: #f8f9fa; /* Для результатів обчислень, тощо */
+    --input-border-radius: 8px; /* Узгоджений радіус */
+    --card-border-radius: 12px; /* Для основних карток */
+    --button-border-radius: 8px;
+
+    /* Тіні (можна розширити, якщо потрібно) */
+    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --shadow-active: 0 3px 6px rgba(0, 0, 0, 0.2); /* Для активних станів кнопок */
+
+    --button-download-bg-start: #00c6ff;  /* Яскравий блакитний/ціан */
+    --button-download-bg-end: #0072ff;    /* Глибший синій */
+    --button-download-hover-bg-start: #00a5e0; /* Трохи темніший для hover */
+    --button-download-hover-bg-end: #005ac8;   /* Трохи темніший для hover */
+    --button-download-text-color: #ffffff;
+    --button-download-icon-color: #ffffff;
+    --button-download-shadow: 0 5px 12px rgba(0, 100, 220, 0.3); /* М'яка тінь */
+    --button-download-hover-shadow: 0 7px 18px rgba(0, 100, 220, 0.4);
+    --button-download-active-shadow: 0 3px 8px rgba(0, 100, 220, 0.25);
+}
+
+body.dark-mode {
+    --bg-gradient: linear-gradient(120deg, #1e1e2f, #2b2b3c);
+    --text-color: #e0e0e0;
+    --card-bg: #2c2c2c;
+    --accent-color: #66b2ff;
+    --border-color: #444;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+    --button-primary-bg: #007bff;
+    --button-primary-hover: #3399ff;
+    --button-secondary-bg: #444;
+    --button-secondary-hover: #333;
+
+    --button-danger-gradient-start: #c82333;
+    --button-danger-gradient-end: #b50000;
+    --button-danger-gradient-hover-start: #b50000;
+    --button-danger-gradient-hover-end: #c82333;
+
+    --status-new-color: var(--accent-color);
+    --status-progress-color: #ffca2c;
+    --status-done-color: #28a745;
+    --status-pending-color: #e74c3c;
+
+    --subtle-bg-color: #3a3a4a; /* Або var(--border-color) */
+    --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.35);
+    --shadow-active: 0 3px 6px rgba(0, 0, 0, 0.4);
+
+    --button-download-bg-start: #00D2FF; /* Можна залишити яскравими або трохи приглушити */
+    --button-download-bg-end: #3A7BD5;   /* Більш насичений синій для темної теми */
+    --button-download-hover-bg-start: #00B5E0;
+    --button-download-hover-bg-end: #2C6AB5;
+    /* --button-download-text-color: #ffffff; (вже є, якщо не змінюється) */
+    /* --button-download-icon-color: #ffffff; (вже є, якщо не змінюється) */
+    --button-download-shadow: 0 5px 12px rgba(0, 150, 255, 0.25); /* Світліша тінь для темного фону */
+    --button-download-hover-shadow: 0 7px 18px rgba(0, 150, 255, 0.35);
+    --button-download-active-shadow: 0 3px 8px rgba(0, 150, 255, 0.2);
+}
+
+/* ---- Скидання ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    line-height: 1.6; /* Збільшено для кращої читабельності */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px; /* Додано з вашого прикладу */
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ---- Шапка (header) ---- */
+header.dashboard-header {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 1rem 2rem; /* З вашого прикладу */
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--button-border-radius); /* 8px з вашого прикладу */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 2rem; /* Додано відступ */
+}
+
+.header-project-info h1 {
+    margin: 0;
+    font-size: var(--font-size-xxlarge); /* 2rem з вашого прикладу */
+    /* Градієнтний текст з вашого прикладу */
+    background: linear-gradient(90deg, var(--accent-color), var(--button-primary-hover)); /* Або інший колір для другого стопу */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.header-project-summary {
+    margin-top: 0.5rem; /* Збільшено відступ */
+    display: flex;
+    gap: 1.5rem; /* Збільшено проміжок */
+    font-size: var(--font-size-small);
+}
+
+#user-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Збільшено проміжок */
+}
+
+/* Кнопка виходу стилізована як у вашому прикладі */
+#logout-button-planner {
+    padding: 0.75rem 1.5rem;
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: #fff; /* Текст завжди білий для градієнтних кнопок */
+    background: linear-gradient(90deg, var(--button-danger-gradient-start), var(--button-danger-gradient-end));
+    border: none;
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Початкова тінь як у прикладі */
+}
+
+#logout-button-planner:hover {
+    background: linear-gradient(90deg, var(--button-danger-gradient-hover-start), var(--button-danger-gradient-hover-end));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Тінь при наведенні */
+}
+
+#logout-button-planner:active {
+    transform: translateY(1px);
+    box-shadow: var(--shadow-active);
+}
+
+/* ---- Основний контейнер (стиль як 'main' з вашого прикладу) ---- */
+main.details-container {
+    flex: 1; /* Для заповнення простору, якщо body - flex column */
+    width: 100%; /* Займає всю доступну ширину в межах body padding */
+    max-width: 1200px; /* Збільшено для більшого контенту, можна налаштувати */
+    padding: 2rem;
+    background-color: var(--card-bg);
+    border-radius: var(--card-border-radius); /* 12px з вашого прикладу */
+    box-shadow: var(--shadow);
+    margin: 0 auto 2rem auto; /* Центрування та відступ знизу */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Збільшено проміжок */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+main.details-container:hover {
+    box-shadow: var(--shadow-hover); /* Тінь як у main:hover з вашого прикладу */
+}
+
+/* ---- Стилізація контейнера для кнопок "Назад" та "Звіт" ---- */
+.back-button-container {
+    display: flex;
+    justify-content: space-between; /* Розподіляє простір: перший елемент зліва, останній справа, решта між ними */
+    align-items: center;            /* Вирівнює кнопки по вертикалі */
+    width: 100%;                    /* Контейнер займає всю доступну ширину для правильного розподілу */
+    margin-bottom: 1.5rem;          /* Відстань знизу від цього блоку */
+    /* gap: 1rem;  При використанні space-between для трьох елементів, явний gap може бути непотрібним,
+                    або може додати зайвий простір навколо центрального елемента.
+                    Якщо між кнопками потрібен мінімальний гарантований простір, можна повернути gap,
+                    але space-between вже створить максимальний можливий простір. */
+}
+
+.back-button {
+    padding: 0.9rem 1.5rem;
+    font-size: var(--font-size-medium);
+    text-decoration: none;
+    font-weight: bold;
+    background-color: var(--button-secondary-bg);
+    color: #fff;
+    border: none;
+    border-radius: var(--button-border-radius);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: var(--button-secondary-hover);
+    transform: translateY(-2px);
+}
+/* ---- Спеціальний дизайн для кнопки "Завантажити звіт" ---- */
+.button-download-report {
+    padding: 0.8rem 1.8rem; /* Трохи більші відступи */
+    font-size: var(--font-size-medium); /* 1rem (16px) */
+    font-weight: bold;
+    color: var(--button-download-text-color);
+    background: linear-gradient(135deg, var(--button-download-bg-start), var(--button-download-bg-end));
+    border: none;
+    border-radius: var(--button-border-radius, 8px); /* Використовуємо існуючий радіус */
+    cursor: pointer;
+    display: inline-flex; /* Для розміщення іконки та тексту в ряд */
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem; /* Відстань між іконкою та текстом */
+    text-decoration: none;
+    white-space: nowrap; /* Щоб текст не переносився */
+    box-shadow: var(--button-download-shadow);
+    transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+    box-shadow 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+    background 0.3s ease;
+    position: relative; /* Для можливих псевдо-елементів */
+    overflow: hidden;   /* Для ефекту "сяйва" */
+}
+
+.button-download-report .button-icon {
+    width: 1.25em; /* Розмір відносно шрифта кнопки */
+    height: 1.25em;
+    fill: var(--button-download-icon-color); /* Колір іконки */
+    /* Додамо невелику тінь до іконки для глибини */
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.2));
+}
+
+.button-download-report:hover {
+    background: linear-gradient(135deg, var(--button-download-hover-bg-start), var(--button-download-hover-bg-end));
+    box-shadow: var(--button-download-hover-shadow);
+    transform: translateY(-3px); /* Більш виразний ефект підняття */
+}
+
+.button-download-report:active {
+    transform: translateY(-1px);
+    box-shadow: var(--button-download-active-shadow);
+}
+
+/* Опціональний ефект "сяйва" при наведенні */
+.button-download-report::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%; /* Починається за межами кнопки */
+    width: 60%;  /* Ширина сяйва */
+    height: 100%;
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.35), /* Колір сяйва (можна зробити світлішим/темнішим) */
+            transparent
+    );
+    transition: left 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform: skewX(-25deg); /* Нахил сяйва */
+    pointer-events: none; /* Щоб не заважало кліку */
+}
+
+.button-download-report:hover::before {
+    left: 120%; /* Проходить через всю кнопку */
+}
+/* ---- Зона завдань ---- */
+#tasks-display-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Залишено для проміжків між картками завдань */
+    width: 100%;
+}
+
+/* ---- Карточка завдання (стиль як .section-card) ---- */
+.task-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--button-border-radius); /* 8px, як .section-card */
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.task-item:hover {
+    transform: translateY(-3px); /* Збільшено ефект підняття */
+    box-shadow: var(--shadow-hover);
+}
+
+/* Статуси з лівою межею, кольори з нових змінних */
+.task-item.status-нове { border-left: 6px solid var(--status-new-color); }
+.task-item.status-в_роботі { border-left: 6px solid var(--status-progress-color); }
+.task-item.status-виконано { border-left: 6px solid var(--status-done-color); }
+.task-item.status-не_почате { border-left: 6px solid var(--status-pending-color); }
+
+.task-description {
+    font-size: var(--font-size-large); /* 1.25rem */
+    font-weight: bold;
+    color: var(--accent-color); /* Як h3 в .section-card */
+    margin-bottom: 0.5rem; /* Додано невеликий відступ */
+}
+
+/* ---- Інпути та селекти ---- */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"],
+select {
+    padding: 0.8rem 1rem; /* Збільшено padding для кращого вигляду */
+    font-size: var(--font-size-medium);
+    border: 1px solid var(--border-color);
+    border-radius: var(--input-border-radius);
+    width: 100%;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: var(--card-bg); /* Для узгодження з картками, особливо в темній темі */
+    color: var(--text-color);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--accent-color), 0.25); /* Додано тінь фокусу */
+}
+body.dark-mode select { /* Специфічні стилі для select в темній темі */
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+/* ---- Форми ---- */
+.form-group-inline {
+    display: flex;
+    flex-wrap: wrap; /* Дозволяє переносити елементи на новий рядок */
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem; /* Збільшено відступ */
+}
+
+.label {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    min-width: 150px; /* Мінімальна ширина для міток, для кращого вирівнювання */
+    color: var(--text-color);
+    padding-right: 0.5rem; /* Додано відступ справа для мітки */
+}
+
+.task-specific-inputs {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.75rem; /* Трохи збільшено */
+    margin-bottom: 0.5rem; /* Відступ після блоку специфічних інпутів */
+}
+
+/* ---- ОНОВЛЕНО: Стилізація результатів обчислень та часу ---- */
+.task-calculation-results,
+.task-time-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem; /* Проміжок між "таблетками" */
+    padding: 0.75rem; /* Внутрішній відступ контейнера */
+    /* Ледь помітний фон для контейнера, щоб візуально згрупувати елементи */
+    background-color: rgba(0,0,0,0.02);
+    border-radius: var(--input-border-radius); /* Такий же радіус, як у полів вводу (8px) */
+    margin-top: 0.75rem; /* Відступ зверху */
+    margin-bottom: 0.75rem; /* Відступ знизу */
+}
+
+body.dark-mode .task-calculation-results,
+body.dark-mode .task-time-results {
+    /* Ледь помітний фон для контейнера в темній темі */
+    background-color: rgba(255,255,255,0.03);
+}
+
+/* Стилізація окремих "таблеток" з даними */
+.task-calculation-results small,
+.task-time-results small {
+    padding: 0.5rem 0.9rem; /* Збільшені відступи для кращого вигляду */
+    background-color: var(--card-bg); /* Фон "таблетки" - як фон картки */
+    color: var(--text-color);
+    border-radius: 6px; /* Трохи менший радіус для "таблеток" */
+    font-size: var(--font-size-small); /* 14px */
+    /* Легка тінь для "таблеток", щоб додати об'єму */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.07);
+    display: inline-flex; /* Для вирівнювання тексту, якщо потрібно */
+    align-items: baseline;
+    line-height: 1.4;
+    border: 1px solid var(--border-color); /* Межа для "таблеток" */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.task-calculation-results small:hover,
+.task-time-results small:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+
+body.dark-mode .task-calculation-results small,
+body.dark-mode .task-time-results small {
+    /* В темній темі "таблетки" отримують --subtle-bg-color */
+    background-color: var(--subtle-bg-color); /* #3a3a4a */
+    color: var(--text-color);
+    /* Тінь для "таблеток" в темній темі */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    /* Світліша межа для "таблеток" в темній темі */
+    border-color: rgba(255,255,255,0.1);
+}
+body.dark-mode .task-calculation-results small:hover,
+body.dark-mode .task-time-results small:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+
+
+/* Стилізація мітки та значення всередині "таблетки" */
+.task-calculation-results small span,
+.task-time-results small span {
+    font-weight: bold;
+    color: var(--accent-color); /* Акцентний колір для значення */
+    margin-left: 0.4rem; /* Відступ між міткою та значенням */
+}
+
+/* ---- ОНОВЛЕНО: Стилізація блоку "Вартість роботи" ---- */
+.task-work-cost-results { /* Цей клас використовується у вашому JS для обгортки */
+    padding: 0.85rem 1rem; /* Збільшено відступи */
+    /* Ледь помітний фон, як і для інших контейнерів результатів */
+    background-color: rgba(0,0,0,0.02);
+    border-radius: var(--input-border-radius); /* 8px */
+    margin-top: 0.75rem;
+    margin-bottom: 1rem; /* Трохи більший відступ знизу */
+    font-size: var(--font-size-medium); /* 16px, трохи більший шрифт для цього підсумку */
+    border-left: 4px solid var(--accent-color); /* Додамо акцентну лінію зліва */
+    display: flex; /* Для кращого контролю */
+    align-items: center;
+}
+
+body.dark-mode .task-work-cost-results {
+    background-color: rgba(255,255,255,0.03);
+    border-left-color: var(--accent-color);
+}
+
+.task-work-cost-results small { /* Тег <small> всередині .task-work-cost-results */
+    color: var(--text-color);
+}
+
+.task-work-cost-results small span { /* Безпосередньо значення вартості всередині <span> */
+    font-weight: bold;
+    color: var(--accent-color);
+    font-size: 1.1em; /* Зробимо саме число трохи більшим */
+    margin-left: 0.5rem;
+}
+/* ---- Кінець оновлених стилів для результатів ---- */
+
+
+/* ---- Кнопка збереження (стиль як основна кнопка) ---- */
+.button-save-task-changes {
+    padding: 0.9rem 1.5rem; /* Як у .back-button */
+    background-color: var(--button-primary-bg); /* Використовуємо нову змінну */
+    color: #fff; /* Текст білий */
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    border: none;
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start; /* Щоб кнопка не розтягувалася на всю ширину батьківського flex-контейнера */
+    margin-top: 1rem; /* Додано відступ зверху */
+}
+
+.button-save-task-changes:hover {
+    background-color: var(--button-primary-hover);
+    transform: translateY(-2px); /* Ефект підняття як у інших кнопок */
+}
+
+.button-save-task-changes:active {
+    transform: scale(0.98); /* Легке натискання */
+}
+
+/* ---- Загальний підсумок (стиль як картка) ---- */
+#task-summary, #calculation-summary {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--button-border-radius); /* 8px, як .section-card */
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Додано для кращого вирівнювання */
+    flex-wrap: wrap; /* Дозволяє переносити елементи */
+    gap: 1rem; /* Проміжок між елементами */
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: var(--text-color); /* Основний колір тексту */
+    margin-top: 1.5rem;
+}
+#task-summary p, #calculation-summary .summary-item { /* Стилізація тексту всередині */
+    color: var(--text-color); /* Змінено на основний, щоб акцент був на значеннях */
+}
+#task-summary p span, /* Якщо є span для значень в #task-summary */
+#calculation-summary .summary-item span { /* Для значень в #calculation-summary */
+    color: var(--accent-color); /* Акцентний колір для значень */
+    font-weight: bold;
+}
+
+#calculation-summary .summary-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Кожен елемент на всю ширину */
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--border-color);
+}
+#calculation-summary .summary-item:first-child {
+    border-top: none;
+}
+#calculation-summary .summary-title {
+    font-weight: bold;
+    color: var(--text-color); /* Назва властивості */
+}
+
+
+/* ---- Повідомлення ---- */
+#loading-manager,
+#manager-message-area {
+    text-align: center;
+    font-size: var(--font-size-medium);
+    padding: 2rem; /* Збільшено */
+    color: var(--text-color);
+}
+
+/* ---- Список завдань з детальними даними (вже всередині .task-item) ---- */
+/* Якщо .task-calculation використовується окремо, його можна стилізувати тут */
+/* Але зазвичай результати вже вбудовані через .task-calculation-results */
+/*
+#tasks-display-area .task-calculation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    font-size: var(--font-size-small);
+    font-style: italic;
+    color: var(--text-color);
+}
+*/
+
+/* Індивідуальні стилі для норм продуктивності (залишено як є, але оновлено радіус) */
+.norm-marker {
+    display: inline-block;
+    padding: 0.3rem 0.6rem; /* Трохи збільшено */
+    font-size: 0.75rem; /* 12px */
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #ffffff; /* За замовчуванням білий, АЛЕ... */
+    border-radius: 6px; /* Узгоджений радіус */
+    margin: 0.1rem; /* Додано невеликий margin для кращого вигляду при перенесенні */
+}
+
+/* Кольорові маркери для різних типів завдань (перевірте контрастність!) */
+.norm-marker.drywall_installation { background-color: #007bff; }
+.norm-marker.spackling { background-color: #6c757d; }
+.norm-marker.painting { background-color: #28a745; }
+.norm-marker.flooring_laminate { background-color: #ffc107; color: #333; } /* УВАГА: змінено колір тексту для контрасту! */
+.norm-marker.flooring_tile { background-color: #dc3545; }
+.norm-marker.electrical_points { background-color: #17a2b8; }
+
+/* ---- Повідомлення про ефективність роботи (оновлено) ---- */
+.efficiency-warning {
+    background-color: #fff3cd; /* Стандартний Bootstrap жовтий */
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 1.5rem; /* Збільшено */
+    margin-top: 1.5rem;
+    border-radius: var(--button-border-radius); /* 8px */
+    font-size: var(--font-size-medium);
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Збільшено */
+    box-shadow: var(--shadow);
+}
+body.dark-mode .efficiency-warning {
+    background-color: #4d3803; /* Приклад для темної теми */
+    border-color: #856404;
+    color: #fff3cd;
+}
+
+.efficiency-warning .icon {
+    font-size: var(--font-size-xlarge); /* 1.5rem */
+    margin-right: 0.5rem;
+}
+
+.efficiency-warning strong {
+    font-weight: bold;
+}
+
+/* ---- Адаптивність (оновлено з урахуванням нових стилів) ---- */
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* Менший padding на мобільних */
+    }
+
+    header.dashboard-header {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0.75rem; /* Трохи зменшимо горизонтальний padding */
+        text-align: center;
+    }
+
+    .header-project-info {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .header-project-info h1 {
+        font-size: var(--font-size-large); /* Зменшуємо до 1.25rem */
+        line-height: 1.3; /* Покращуємо міжрядковий інтервал для можливих переносів */
+        margin-bottom: 0.5rem;
+        /* Опціонально: змінити колір для кращої читабельності на мобільних */
+        /* background: none;
+           -webkit-text-fill-color: var(--accent-color);
+           color: var(--accent-color); */
+    }
+    /* Якщо span всередині h1 також має наслідувати колір */
+    .header-project-info h1 span {
+        /* background: none;
+           -webkit-text-fill-color: var(--accent-color);
+           color: var(--accent-color); */
+    }
+
+
+    .header-project-summary {
+        font-size: var(--font-size-small); /* 0.875rem */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.2rem; /* Ще менший gap */
+    }
+    .header-project-summary small {
+        margin-left: 0 !important;
+    }
+
+    #user-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        margin-top: 0.5rem; /* Додамо невеликий відступ зверху */
+    }
+
+    #user-actions #user-email {
+        font-size: var(--font-size-small); /* 0.875rem */
+        color: var(--text-color);
+        word-break: break-all;
+        padding: 0.25rem 0;
+        line-height: 1.4;
+    }
+
+    /* Загальні стилі для ВСІХ кнопок всередині #user-actions на мобільних */
+    /* Це включає #logout-button-planner та будь-які кнопки з класом .button */
+    #user-actions #logout-button-planner,
+    #user-actions .button { /* Якщо ви додасте інші кнопки з класом .button сюди */
+        padding: 0.6rem 1rem;   /* Значно зменшуємо padding */
+        font-size: var(--font-size-small); /* Шрифт 0.875rem */
+        min-width: auto;        /* Прибираємо min-width, щоб кнопка могла бути вужчою */
+        width: fit-content;     /* Ширина кнопки по її вмісту + padding */
+        max-width: 280px;       /* Обмежуємо максимальну ширину, щоб не була занадто широкою */
+        /* Якщо текст на кнопці "Вийти" все ще робить її заширокою,
+           можна спробувати встановити фіксовану ширину або ще зменшити padding */
+    }
+    main.details-container {
+        padding: 1.5rem 1rem; /* Зменшено padding */
+        margin: 1.5rem auto;
+        gap: 1.5rem;
+    }
+
+    .task-item {
+        padding: 1rem;
+        gap: 0.75rem;
+    }
+    .task-description {
+        font-size: var(--font-size-medium); /* 1rem */
+    }
+
+    .form-group-inline {
+        flex-direction: column; /* Складання елементів в стовпчик */
+        align-items: stretch; /* Розтягування елементів на всю ширину */
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+    .label {
+        min-width: auto; /* Скидання мін. ширини */
+        margin-bottom: 0.25rem;
+        padding-right: 0;
+    }
+    input[type="text"], input[type="number"], input[type="date"], input[type="email"], select, .button-save-task-changes {
+        width: 100%; /* Поля вводу та кнопки на всю ширину */
+    }
+    .button-save-task-changes {
+        padding: 0.8rem 1rem; /* Адаптивний padding */
+        font-size: var(--font-size-medium);
+    }
+
+    #task-summary, #calculation-summary {
+        flex-direction: column;
+        align-items: stretch; /* Елементи на всю ширину */
+        gap: 0.75rem;
+        padding: 1rem;
+        text-align: center;
+    }
+    #calculation-summary .summary-item {
+        text-align: left; /* Вирівнювання тексту для кращої читабельності */
+        padding: 0.5rem 0;
+    }
+    .task-calculation-results, .task-time-results, .task-work-cost-results {
+        padding: 0.75rem;
+        font-size: var(--font-size-small);
+        gap: 0.5rem; /* Менший проміжок між таблетками */
+    }
+    .task-calculation-results small, .task-time-results small {
+        padding: 0.4rem 0.7rem; /* Менші таблетки */
+    }
+    .task-work-cost-results {
+        padding: 0.7rem 0.8rem;
+        font-size: var(--font-size-small);
+    }
+    .task-work-cost-results small span {
+        font-size: 1em; /* Нормальний розмір для значення на мобільних */
+    }
+}
+
+@media (max-width: 480px) {
+    .header-project-info h1 {
+        font-size: var(--font-size-large); /* Ще менший заголовок */
+    }
+    .task-description {
+        font-size: var(--font-size-medium);
+    }
+    .norm-marker {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.7rem;
+    }
+    #logout-button-planner, .back-button, .button-save-task-changes {
+        padding: 0.6rem 1rem;
+        font-size: var(--font-size-small);
+    }
+}

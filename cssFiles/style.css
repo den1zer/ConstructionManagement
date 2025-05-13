@@ -1,0 +1,184 @@
+:root {
+    --bg-color: #f4f4f8;
+    --text-color: #333;
+    --card-bg: #fff;
+    --accent-color: #007bff;
+    --accent-hover: #0056b3;
+    --border-color: #ccc;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme="dark"] {
+    --bg-color: #1e1e2f;
+    --text-color: #f1f1f1;
+    --card-bg: #2a2a3d;
+    --accent-color: #339cff;
+    --accent-hover: #1f74c3;
+    --border-color: #444;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+h1, h2, h3 {
+    color: var(--text-color);
+    margin-top: 0;
+}
+
+.login-container {
+    display: flex;
+    width: 90%;
+    max-width: 900px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px var(--shadow-color);
+    overflow: hidden;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.login-image-side {
+    flex: 1;
+    background-color: #e7f0ff;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+body[data-theme="dark"] .login-image-side {
+    background-color: #2e3c5a;
+}
+
+.login-image-side img {
+    max-width: 300px;
+    margin-bottom: 20px;
+    border: 1px dashed var(--border-color);
+    min-height: 100px;
+}
+
+.login-form-side {
+    flex: 1.2;
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form-side h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.auth-form h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: transparent;
+    color: var(--text-color);
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+.button {
+    display: block;
+    width: 100%;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--accent-hover);
+}
+
+#auth-error {
+    color: #dc3545;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--text-color);
+}
+
+.signup-link a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+#loading-indicator {
+    text-align: center;
+    padding: 10px;
+    font-style: italic;
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column; /* Робимо контейнери вертикальними */
+        width: 95%; /* Зменшуємо ширину для мобільних пристроїв */
+    }
+
+    .login-image-side {
+        display: none; /* Ховаємо блок із зображеннями */
+    }
+
+    .login-form-side {
+        padding: 20px; /* Зменшуємо внутрішні відступи для форми */
+    }
+}
+

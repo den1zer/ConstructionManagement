@@ -4,32 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/cssFiles/style.css">
     <title>Construction Management - Вхід</title>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 </head>
 <body>
 <div class="login-container">
     <div class="login-image-side">
-        <img src="Vot-.jpg" alt="Логотип Construction Management">
+        <button onclick="toggleTheme()" style="position: fixed; top: 1rem; right: 1rem; padding: 10px; border-radius: 6px; background: #eee; cursor: pointer;">🌓</button>
+        <img src="/resources/logo.jpg" alt="Логотип Construction Management">
         <h2>Construction Management</h2>
-        <p>Ефективне управління будівельними проектами.</p>
+        <p>Ефективне управління ремонтними роботами.</p>
     </div>
     <div class="login-form-side">
         <h1>Вхід в Систему</h1>
-        <div id="auth-error" style="color: red; margin-bottom: 15px; min-height: 1.2em; text-align: center;"></div>
-        <div id="login-section" class="auth-form"> <h3>Введіть дані для входу</h3>
-            <div class="form-group"> <label for="login-email">Email:</label>
-                <input type="email" id="login-email" required> </div>
-            <div class="form-group"> <label for="login-password">Пароль:</label>
-                <input type="password" id="login-password" required> </div>
-            <button id="login-button" class="button" type="button">Увійти</button>
-        </div>
-        <p class="signup-link">Немає акаунту? <a href="#">Зареєструватись</a></p>
+        <div id="login-message" class="form-message" style="display: none; margin-bottom: 15px; min-height: 1.2em; text-align: center;"></div>
+        <form id="login-form" class="auth-form">
+            <h3>Введіть дані для входу</h3>
+            <div class="form-group">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Пароль:</label>
+                <input type="password" id="login-password" required>
+            </div>
+            <button id="login-button" class="button" type="submit">Увійти</button>
+        </form> <p class="signup-link">Немає акаунту? <a href="/html/registrationPage.html">Зареєструватись</a></p>
+        <div id="loading-indicator" style="display: none; text-align: center; padding: 10px; font-style: italic;">Обробка...</div>
     </div>
 </div>
 
-<script src=".idea/script.js"></script>
+<script type="module" src="/src/script.js"></script>
+<script>
+    function toggleTheme() {
+        const current = document.body.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.body.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const saved = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', saved);
+    });
+</script>
 </body>
 </html>

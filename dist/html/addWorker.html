@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="uk">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Додати Робітника - Construction Management</title>
+
+
+
+  <script type="module" crossorigin src="/assets/addWorker-bCCJr1Bv.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="stylesheet" crossorigin href="/assets/addWorker-Czx86Xri.css">
+</head>
+
+<body>
+
+
+<h1>Додати Нового Робітника</h1>
+
+
+<div id="form-message" style="display: none;"></div>
+
+<div id="loading-indicator" style="display: none;">Обробка...</div>
+
+
+<form id="add-worker-form">
+
+
+    <div class="form-group">
+
+        <label for="worker-name">Повне ім'я та прізвище:</label>
+
+        <input type="text" id="worker-name" name="workerName" required>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="worker-specialty">Спеціальність / Посада:</label>
+
+        <select id="worker-specialty" name="workerSpecialty" required>
+
+            <option value="" disabled selected>--- Оберіть зі списку ---</option>
+
+            <option value="Електрик">Електрик</option>
+
+            <option value="Сантехнік">Сантехнік</option>
+
+            <option value="Штукатур">Штукатур</option>
+
+            <option value="Маляр">Маляр</option>
+
+            <option value="Плиточник">Плиточник</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="worker-phone">Контактний телефон:</label>
+
+        <input type="tel" id="worker-phone" name="workerPhone" placeholder="+380 XX XXX XX XX">
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="worker-email">Email (необов'язково):</label>
+
+        <input type="email" id="worker-email" name="workerEmail">
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="worker-rate">Ставка / Вартість години (грн, необов'язково):</label>
+
+        <input type="number" id="worker-rate" name="workerRate" min="0" step="1">
+
+    </div>
+
+
+    <button type="submit" id="save-worker-button">Додати Робітника в Систему</button>
+
+
+</form>
+
+
+
+
+</body>
+
+</html>

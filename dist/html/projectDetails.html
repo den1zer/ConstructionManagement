@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі Проекту - Панель ремонтними роботами</title>
+       <script type="module" crossorigin src="/assets/projectDetails-BBJOYeuT.js"></script>
+       <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+       <link rel="stylesheet" crossorigin href="/assets/projectDetails-BtlNHfni.css">
+     </head>
+<body class="project-details-page"> <header class="dashboard-header">
+    <h1>Деталі Проекту</h1>
+    <div id="user-actions">
+        <span id="user-email"></span> <button id="logout-button">Вийти</button>
+    </div>
+</header>
+
+<main>
+    <div class="back-button-container details-back-button">
+        <a href="/html/mainPage.html" class="back-button">&larr; До всіх проектів</a>
+    </div>
+
+    <div id="loading-details" style="display: block;">Завантаження деталей проекту...</div>
+    <div id="project-not-found" style="display: none; color: red; text-align: center; padding: 2rem;">Проект не знайдено або у вас немає доступу.</div>
+
+    <div id="project-details-content" style="display: none;">
+        <h2 id="project-name">Назва проекту</h2>
+        <section class="project-meta">
+            <p><strong>Статус:</strong> <span id="project-status"></span></p>
+            <p><strong>Дата початку:</strong> <span id="project-start-date"></span></p>
+            <p><strong>Дата завершення (план):</strong> <span id="project-end-date"></span></p>
+        </section>
+
+        <section class="project-description-section">
+            <h3>Опис проекту</h3>
+            <p id="project-description">Опис відсутній</p>
+        </section>
+
+        <section class="client-info-section">
+            <h3>Інформація про клієнта</h3>
+            <p><strong>Ім'я:</strong> <span id="client-name"></span></p>
+            <p><strong>Телефон:</strong> <span id="client-phone"></span></p>
+            <p><strong>Email:</strong> <span id="client-email"></span></p>
+        </section>
+
+        <section class="photos-section">
+            <h3>Фотографії</h3>
+            <div id="project-photos" class="photo-gallery">
+                <p>Фотографії не завантажені.</p>
+            </div>
+        </section>
+
+        <section class="tasks-section">
+            <h3>Завдання</h3>
+            <ul id="project-tasks">
+                <li>Завдання не додані.</li>
+            </ul>
+        </section>
+
+        <section class="workers-section">
+            <h3>Робітники</h3>
+            <ul id="project-workers">
+                <li>Робітники не призначені.</li>
+            </ul>
+        </section>
+
+    </div>
+</main>
+>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель Керування Проектами</title>
+  <script type="module" crossorigin src="/assets/dashboard-De2smMAx.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="stylesheet" crossorigin href="/assets/dashboard-CFoyg4K_.css">
+</head>
+<body>
+
+<header>
+    <h1>Керування Будівельними Проектами</h1>
+    <div id="user-actions">
+        <span id="user-email"></span> <button id="logout-button">Вийти</button>
+    </div>
+</header>
+
+<main>
+    <div class="action-buttons">
+        <a href="addProject.html" class="button add-project-btn">Додати Новий Проект</a>
+        <a href="addWorker.html" class="button add-worker-btn">Додати Робітника</a>
+    </div>
+
+    <section id="projects-section">
+        <h2>Існуючі Проекти:</h2>
+
+        <div id="loading-projects" style="display: none;">Завантаження проектів...</div>
+        <div id="no-projects" style="display: none;">У вас ще немає створених проектів.</div>
+
+        <div id="project-list-container">
+        </div>
+    </section>
+</main>
+
+
+</body>
+</html>

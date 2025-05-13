@@ -1,0 +1,231 @@
+/** Основні змінні кольорів (для тем та заголовків) **/
+:root {
+    --bg-color: #f4f4f8;
+    --text-color: #333;
+    --card-bg: #fff;
+    --accent-color: #007bff;
+    --accent-hover: #0056b3;
+    --border-color: #ccc;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+
+    /* Заголовки */
+    --heading-color: #1a253c;
+
+    /* Темна тема */
+    --dark-bg-color: #1e1e2f;
+    --dark-text-color: #f1f1f1;
+    --dark-card-bg: #2a2a3d;
+    --dark-heading-color: #f1f1f1;
+    --dark-accent-color: #339cff;
+    --dark-accent-hover: #1f74c3;
+    --dark-border-color: #444;
+    --dark-shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+body[data-theme="dark"] {
+    --bg-color: var(--dark-bg-color);
+    --text-color: var(--dark-text-color);
+    --card-bg: var(--dark-card-bg);
+    --heading-color: var(--dark-heading-color);
+    --accent-color: var(--dark-accent-color);
+    --accent-hover: var(--dark-accent-hover);
+    --border-color: var(--dark-border-color);
+    --shadow-color: var(--dark-shadow-color);
+}
+
+/** Базові стилі для сторінки **/
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+/** Стилізація заголовків **/
+h1, h2, h3 {
+    color: var(--heading-color);
+    margin-top: 0;
+    text-align: center;
+}
+
+/** Контейнери **/
+.auth-container {
+    display: flex;
+    width: 90%;
+    max-width: 900px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px var(--shadow-color);
+    overflow: hidden;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.auth-card {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+}
+
+.auth-column {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/** Вирівнювання фото **/
+.auth-column.auth-image-column {
+    flex: 1;
+    background-color: #e7f0ff;
+    text-align: center;
+    padding: 40px;
+}
+
+body[data-theme="dark"] .auth-column.auth-image-column {
+    background-color: #2e3c5a;
+}
+
+.auth-image-column img {
+    max-width: 80%;
+    height: auto; /* Збереження пропорцій */
+    object-fit: contain; /* Динамічне вирівнювання */
+    margin-bottom: 20px;
+    border: 1px dashed var(--border-color);
+    border-radius: 12px;
+}
+
+/** Стилізація тексту заголовків у колонках **/
+.auth-image-column h2 {
+    font-size: 1.8em;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+}
+
+.auth-image-column p {
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+/** Форма входу **/
+.auth-column.auth-form-column {
+    flex: 1.2;
+}
+
+/** Стилізація заголовків у формі **/
+.auth-form-column h1 {
+    font-size: 2em;
+    color: var(--heading-color);
+    margin-bottom: 25px;
+}
+
+.auth-form-column .subtitle {
+    font-size: 1em;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+/** Вирівнювання та стилі форми **/
+.form-group {
+    margin-bottom: 20px; /* Єдиний відступ для обох */
+    width: 100%;
+    text-align: left; /* Якщо потрібне вирівнювання тексту */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"],
+.form-group input[type="tel"] {
+    width: 100%; /* Поля займають всю ширину контейнера */
+    max-width: 360px; /* Як у логіна */
+    padding: 12px 15px; /* Відступи всередині, однакові із логіном */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em; /* Уніфікований розмір тексту */
+    background-color: transparent; /* Фон для обох тем */
+    color: var(--text-color);
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin: 0 auto 20px; /* Відступи, щоб вирівняти по центру */
+}
+
+/* Фокус на полі */
+.form-group input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+    outline: none;
+}
+
+.auth-form-column,
+.login-form-side {
+    padding: 40px 50px; /* Збільшено padding, як у логіні */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/** Кнопка submit **/
+.button {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--accent-hover);
+}
+
+/** Посилання "Вже є акаунт?" **/
+.toggle-link {
+    text-align: center;
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+.toggle-link a {
+    color: var(--accent-color);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.toggle-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .auth-container {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .auth-image-column {
+        display: none; /* Фото зникає у мобільній версії */
+    }
+
+    .auth-form-column {
+        padding: 20px;
+    }
+}

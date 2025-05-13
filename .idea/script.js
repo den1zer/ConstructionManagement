@@ -1,75 +1,142 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const firebaseConfig = {
-
     apiKey: "AIzaSyBNmgSTXoabY_JhynyfxB-4KCcRvYLi6B4",
-
     authDomain: "constructionmanagementsy-b8e52.firebaseapp.com",
-
     projectId: "constructionmanagementsy-b8e52",
-
     storageBucket: "constructionmanagementsy-b8e52.firebasestorage.app",
-
     messagingSenderId: "390996667134",
-
     appId: "1:390996667134:web:0d99cf1ee58824195613af",
-
     measurementId: "G-1B0X0DGTC1"
-
 };
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-const loginEmailInput = document.getElementById('login-email');
-const loginPasswordInput = document.getElementById('login-password');
-const loginButton = document.getElementById('login-button');
-const authErrorDiv = document.getElementById('auth-error');
-
-
-loginButton.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const email = loginEmailInput.value;
-    const password = loginPasswordInput.value;
-
-
-    authErrorDiv.textContent = '';
-    authErrorDiv.style.color = 'red';
-
-
-    if (!email || !password) {
-        authErrorDiv.textContent = 'Будь ласка, введіть email та пароль.';
-        return;
+class AuthService {
+    async signIn(email, password) {
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
+    async signOut() {
+        try {
+            await signOut(auth);
+            window.location.href = 'index.html';
+        } catch (error) {
+            console.error('Помилка виходу:', error);
+        }
+    }
 
-    auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
+    onAuthStateChanged(callback) {
+        return onAuthStateChanged(auth, callback);
+    }
 
-            const user = userCredential.user;
-            console.log('Успішний вхід для користувача:', user.email);
-            authErrorDiv.textContent = 'Вхід виконано успішно!';
-            authErrorDiv.style.color = 'green';
+    getFriendlyAuthErrorMessage(error) {
+        switch (error.code) {
+            case 'auth/invalid-email': return 'Неправильний email.';
+            case 'auth/user-not-found':
+            case 'auth/wrong-password':
+            case 'auth/invalid-credential': return 'Неправильний email або пароль.';
+            default: return `Помилка. (${error.code})`;
+        }
+    }
+}
 
-             window.location.href = 'mainPage.html';
+class LoginForm {
+    constructor(formId, emailId, passwordId, messageId, loadingId, buttonId, authService) {
+        this.form = document.getElementById(formId);
+        this.emailInput = document.getElementById(emailId);
+        this.passwordInput = document.getElementById(passwordId);
+        this.messageDiv = document.getElementById(messageId);
+        this.loadingIndicator = document.getElementById(loadingId);
+        this.submitButton = document.getElementById(buttonId);
+        this.authService = authService;
 
-        })
-        .catch((error) => {
+        if (!this.form) console.error(`Форма "${formId}" не знайдена!`);
+        this._setupEventListeners();
+    }
 
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error('Помилка входу:', errorCode, errorMessage);
+    _setupEventListeners() {
+        this.form?.addEventListener('submit', this._handleSubmit.bind(this));
+        this.emailInput?.addEventListener('input', this._clearErrorMessage.bind(this));
+        this.passwordInput?.addEventListener('input', this._clearErrorMessage.bind(this));
+    }
 
+    _getFormData() {
+        return { email: this.emailInput?.value.trim() || '', password: this.passwordInput?.value || '' };
+    }
 
-            let friendlyMessage = 'Помилка входу. ';
-            if (errorCode === 'auth/invalid-email') {
-                friendlyMessage += 'Неправильний формат email.';
-            } else if (errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password' || errorCode === 'auth/invalid-credential') {
+    _showMessage(message, type = 'info') {
+        if (this.messageDiv) {
+            this.messageDiv.textContent = message;
+            this.messageDiv.className = `form-message message-${type}`;
+            this.messageDiv.style.display = 'block';
+            this.messageDiv.style.color = (type === 'error') ? 'red' : (type === 'success' ? 'green' : 'black');
+        } else {
+            alert(`${type.toUpperCase()}: ${message}`);
+        }
+    }
 
-                friendlyMessage += 'Неправильний email або пароль.';
-            } else {
-                friendlyMessage += 'Спробуйте ще раз або зверніться до адміністратора.';
-            }
-            authErrorDiv.textContent = friendlyMessage;
-        });
+    _setLoading(isLoading) {
+        if (this.loadingIndicator) this.loadingIndicator.style.display = isLoading ? 'block' : 'none';
+        if (this.submitButton) this.submitButton.disabled = isLoading;
+    }
+
+    _clearErrorMessage() {
+        if (this.messageDiv?.style.display !== 'none') {
+            this.messageDiv.textContent = '';
+            this.messageDiv.style.display = 'none';
+        }
+    }
+
+    async _handleSubmit(event) {
+        event.preventDefault();
+        this._clearErrorMessage();
+        const { email, password } = this._getFormData();
+
+        if (!email || !password) {
+            this._showMessage('Будь ласка, введіть email та пароль.', 'error');
+            return;
+        }
+
+        this._setLoading(true);
+
+        try {
+            await this.authService.signIn(email, password);
+            this._showMessage('Вхід виконано! Перенаправлення...', 'success');
+            setTimeout(() => { window.location.href = 'mainPage.html'; }, 1000);
+        } catch (error) {
+            this._showMessage(this.authService.getFriendlyAuthErrorMessage(error), 'error');
+            this._setLoading(false);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const authService = new AuthService();
+    new LoginForm(
+        'login-form',
+        'login-email',
+        'login-password',
+        'login-message',
+        'loading-indicator',
+        'login-button',
+        authService
+    );
+
+    authService.onAuthStateChanged(user => {
+        if (user && !window.location.pathname.includes('mainPage.html')) {
+            window.location.href = 'mainPage.html';
+        }
+    });
 });
+
+function signOutUser(authServiceInstance) {
+    authServiceInstance.signOut();
+}

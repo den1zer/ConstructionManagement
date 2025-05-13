@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Реєстрація - Construction Management</title>
+  <link rel="stylesheet" href="../cssFiles/registrationPage.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-column auth-image-column">
+      <img src="/resources/construction_white_background.png" alt="Будівельний Проект">
+      <h2>Construction Management</h2>
+      <p>Ефективне управління будівельними проектами.</p>
+    </div>
+
+    <div class="auth-column auth-form-column">
+
+      <h1>Реєстрація</h1>
+      <p class="subtitle">Створення нового акаунту</p>
+      <div id="register-message" class="form-message" style="display: none;"></div>
+      <div id="loading-indicator" style="display: none; text-align: center; padding: 10px; font-style: italic;">Обробка...</div>
+
+      <form id="register-form">
+        <div class="form-group">
+          <label for="register-email">Email:</label>
+          <input type="email" id="register-email" name="registerEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="register-password">Пароль (мін. 6 символів):</label>
+          <input type="password" id="register-password" name="registerPassword" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="register-confirm-password">Підтвердіть Пароль:</label>
+          <input type="password" id="register-confirm-password" name="registerConfirmPassword" required>
+        </div>
+        <button type="submit" id="register-button" class="button">Зареєструватись</button>
+      </form>
+      <p class="toggle-link">Вже є акаунт? <a href="/index.html">Увійти</a></p> </div>
+  </div>
+</div>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script type="module" src="/src/registration.js"></script>
+<script>
+  const theme = localStorage.getItem('theme') || 'light';
+  document.body.setAttribute('data-theme', theme);
+
+
+  function toggleTheme() {
+    const currentTheme = document.body.getAttribute('data-theme');
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('theme', nextTheme);
+  }
+</script>
+
+</body>
+</html>

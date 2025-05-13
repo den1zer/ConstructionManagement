@@ -1,115 +1,147 @@
+:root {
+    --bg-gradient: linear-gradient(120deg, #f8f9fa, #e9ecef);
+    --bg-gradient-dark: linear-gradient(120deg, #1e1e2f, #2b2b3c);
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --accent-color: #0d6efd;
+    --button-color: #1837ff;
+    --button-hover: #33c01d;
+    --secondary-button: #6c757d;
+    --secondary-hover: #5a6268;
+    --shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    --border-color: #dee2e6;
+    --font-size: 16px;
+    --font-family: "Segoe UI", "Roboto", sans-serif;
+}
+
+body.dark-mode {
+    --bg-gradient: var(--bg-gradient-dark);
+    --text-color: #f0f0f0;
+    --card-bg: #2b2b3c;
+    --accent-color: #66b2ff;
+    --button-color: #007bff;
+    --button-hover: #3399ff;
+    --secondary-button: #5a6268;
+    --secondary-hover: #444;
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --border-color: #444;
+}
+
+/* Загальний стиль */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    line-height: 1.6;
-    background-color: #f4f7f9;
-    color: #333;
+    font-family: var(--font-family);
     margin: 0;
     padding: 20px;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-color);
+    font-size: var(--font-size);
+    line-height: 1.8;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Заголовки */
 h1 {
-    color: #32465b;
+    font-size: 2.5rem;
     text-align: center;
-    margin-bottom: 30px;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, var(--accent-color), var(--button-hover));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
+/* Основний контейнер */
 #add-worker-form {
-    max-width: 600px;
-    margin: 30px auto;
-    background-color: #ffffff;
-    padding: 30px 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
 }
 
+#add-worker-form:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Поля форми */
 .form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: #555;
-    font-size: 0.95em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
 }
 
 input[type="text"],
-input[type="tel"],
 input[type="email"],
-input[type="number"] {
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+textarea,
+select {
     width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
+    max-width: 100%;
+    padding: 0.9rem 1.2rem;
+    font-size: 1.1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    overflow: hidden;
     box-sizing: border-box;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-input[type="text"]:focus,
-input[type="tel"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 6px rgba(52, 152, 219, 0.4);
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--accent-color);
     outline: none;
+    box-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
 }
 
-.form-group small {
-    display: block;
-    margin-top: 5px;
-    font-size: 0.85em;
-    color: #777;
-}
-
+/* Кнопка збереження */
 button[type="submit"]#save-worker-button {
+    margin: 10px auto; /* Центрування елемента */
     display: block;
-    width: 100%;
-    padding: 12px 20px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.1em;
+    padding: 0.9rem 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
+    background: linear-gradient(90deg, var(--button-color), var(--button-hover));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 25px;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow);
 }
 
 button[type="submit"]#save-worker-button:hover {
-    background-color: #2980b9;
+    background: linear-gradient(90deg, var(--button-hover), var(--button-color));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-#form-message,
-#loading-indicator {
-    padding: 12px;
-    margin: 20px 0;
-    border-radius: 4px;
-    text-align: center;
-    font-weight: 500;
-    display: none;
+button[type="submit"]#save-worker-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-#loading-indicator {
-    font-style: italic;
-    color: #555;
-    background-color: transparent;
-    border: none;
-}
-.message-success { background-color: #eafaf1; color: #27ae60; border: 1px solid #abebc6;}
-.message-error { background-color: #fdedec; color: #c0392b; border: 1px solid #f5b7b1;}
-.message-info { background-color: #ebf5fb; color: #2980b9; border: 1px solid #aed6f1;}
 
+/* Адаптичність */
 @media (max-width: 600px) {
     body {
-        padding: 15px;
+        padding: 10px;
     }
+
     #add-worker-form {
-        padding: 20px;
-        margin-top: 20px;
+        padding: 1.5rem;
     }
+
     h1 {
-        font-size: 1.5em;
+        font-size: 2rem;
     }
 }
